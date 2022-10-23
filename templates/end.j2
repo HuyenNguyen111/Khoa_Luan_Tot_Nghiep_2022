@@ -5,9 +5,7 @@
     <div class="note_info"><span>*</span> Bạn vui lỏng bỏ từng chai vào để máy bắt đầu đếm khi hết chai vui lòng nhấn
         bút end để kết thúc
     </div>
-    <form action="" method="post" id="my_form">
-        <button type="submit">Kết thúc</button>
-    </form>
+    <button type="button" id="btn_end">Kết thúc</button>
 
 
     <div id="modal_container">
@@ -22,7 +20,7 @@
                     <li>Số lượng: 10</li>
                 </ul>
                 <div class="note_info"><span>*</span> Ghi chú: nếu có sai xót vui lòng ghi chú vào ô bên dưới</div>
-                <form action="" id="confirm_form">
+                <form action="" id="confirm_form" method="post">
                     <textarea name="note" id="note" placeholder="Ghi chú"></textarea>
                     <button>Xác nhận</button>
                 </form>

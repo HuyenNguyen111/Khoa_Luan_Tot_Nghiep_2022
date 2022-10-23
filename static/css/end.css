@@ -7,7 +7,7 @@
     color: red;
 }
 
-#my_form button {
+#btn_end {
     padding: 10px 15px;
     border: none;
     background-color: #ff6464;
@@ -100,7 +100,7 @@
     span {
         font-size: 35px;
     }
-    #my_form button {
+    #btn_end {
         font-size: 35px;
         margin-top: 40px;
     }
@@ -141,7 +141,7 @@
     span {
         font-size: 20px;
     }
-    #my_form button {
+    #btn_end {
         font-size: 20px;
         margin-top: 15px;
     }
