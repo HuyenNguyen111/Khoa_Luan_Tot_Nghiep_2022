@@ -1,0 +1,80 @@
+.start {
+    width: 50%;
+    margin: 0 auto;
+}
+.start span {
+    color: red;
+}
+
+.start form {
+    margin-top: 20px;
+}
+.start form .form_group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.form_group input {
+    border: 1px solid gray;
+    width: 70%;
+    padding: 7px;
+}
+
+form button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #3c74f3;
+    color: #fff;
+    border-radius: 10px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .start {
+        width: 70%;
+        margin-top: 100px;
+    }
+    .start_note,
+    input,
+    button {
+        font-size: 35px;
+    }
+    .form_group label {
+        font-size: 28px;
+        min-width: 100px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    /* ...; */
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .start {
+        width: 50%;
+        margin-top: 50px;
+    }
+
+    .start_note,
+    input,
+    button {
+        font-size: 20px;
+    }
+    .form_group label {
+        font-size: 18px;
+        min-width: 100px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    /* ...; */
+}

@@ -1,0 +1,170 @@
+.end {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.end div span {
+    color: red;
+}
+
+#my_form button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #ff6464;
+    color: #fff;
+    border-radius: 10px;
+}
+
+#modal_container {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal {
+    width: 400px;
+    height: 400px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 2;
+    background-color: #fff;
+    margin: 0 auto;
+    margin-top: 30px;
+    position: relative;
+    border-radius: 10px;
+    padding: 10px;
+}
+.modal_header {
+    text-align: right;
+    padding: 10px;
+}
+#close_modal {
+    font-size: 24px;
+    color: red;
+    cursor: pointer;
+}
+
+#confirm_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+}
+#confirm_form textarea {
+    resize: none;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 16px;
+}
+#confirm_form textarea:focus {
+    outline: none;
+}
+
+#confirm_form button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #ff6464;
+    color: #fff;
+    border-radius: 10px;
+    /* width: 120px; */
+    margin-top: 20px;
+}
+
+.note_info {
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.note_info span {
+    color: red;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    /*  */
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .end {
+        width: 70%;
+        margin-top: 100px;
+    }
+    div,
+    li,
+    span {
+        font-size: 35px;
+    }
+    #my_form button {
+        font-size: 35px;
+        margin-top: 40px;
+    }
+
+    .modal {
+        margin-top: 200px;
+        width: 700px;
+        height: 700px;
+    }
+    #close_modal {
+        font-size: 35px;
+    }
+    .modal button {
+        font-size: 35px;
+        width: 200px;
+    }
+    textarea {
+        min-height: 280px;
+        font-size: 30px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #confirm_form textarea {
+        font-size: 25px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .end {
+        width: 50%;
+        margin-top: 50px;
+    }
+    div,
+    li,
+    span {
+        font-size: 20px;
+    }
+    #my_form button {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    .modal {
+        width: 400px;
+        height: 400px;
+    }
+    .modal button {
+        font-size: 16px;
+        width: 100px;
+    }
+
+    textarea {
+        font-size: 16px !important;
+        min-height: 150px;
+    }
+    #close_modal {
+        font-size: 25px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    /* ...; */
+}
