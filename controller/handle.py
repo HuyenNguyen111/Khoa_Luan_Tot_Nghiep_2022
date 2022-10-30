@@ -1,12 +1,12 @@
 from flask import Blueprint,  redirect, render_template, request
-from helper import detect, session
+from helper import detect, buffers, context
 from multiprocessing import Process, Event
 import json
 
 bp = Blueprint('process', __name__, url_prefix='/')
 
 event = Event()
-exec = Process(target=detect, args=(event, session))
+exec = Process(target=detect, args=(event,  buffers, context))
 
 
 @bp.route("/")

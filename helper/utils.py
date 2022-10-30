@@ -2,6 +2,8 @@ import time
 import numpy as np
 import cv2
 import math
+import pycuda.driver as cuda
+import tensorrt as trt
 
 
 def nms_cpu(boxes, confs, nms_thresh=0.5, min_mode=False):
@@ -149,3 +151,56 @@ def plot_boxes_cv2(img, boxes, class_names=None, color=None):
                 c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), bbox_thick//2, lineType=cv2.LINE_AA)
         img = cv2.rectangle(img, (x1, y1), (x2, y2), rgb, bbox_thick)
     return img
+
+
+def do_inference(context, bindings, inputs, outputs, stream):
+    # Transfer input data to the GPU.
+    [cuda.memcpy_htod_async(inp.device, inp.host, stream) for inp in inputs]
+    # Run inference.
+    context.execute_async(bindings=bindings, stream_handle=stream.handle)
+    # Transfer predictions back from the GPU.
+    [cuda.memcpy_dtoh_async(out.host, out.device, stream) for out in outputs]
+    # Synchronize the stream
+    stream.synchronize()
+    # Return only the host outputs.
+    return [out.host for out in outputs]
+
+
+class HostDeviceMem(object):
+    def __init__(self, host_mem, device_mem):
+        self.host = host_mem
+        self.device = device_mem
+
+    def __str__(self):
+        return "Host:\n" + str(self.host) + "\nDevice:\n" + str(self.device)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+def allocate_buffers(engine, batch_size):
+    inputs = []
+    outputs = []
+    bindings = []
+    stream = cuda.Stream()
+    for binding in engine:
+
+        size = trt.volume(engine.get_binding_shape(binding)) * batch_size
+        dims = engine.get_binding_shape(binding)
+
+        # in case batch dimension is -1 (dynamic)
+        if dims[0] < 0:
+            size *= -1
+
+        dtype = trt.nptype(engine.get_binding_dtype(binding))
+        # Allocate host and device buffers
+        host_mem = cuda.pagelocked_empty(size, dtype)
+        device_mem = cuda.mem_alloc(host_mem.nbytes)
+        # Append the device buffer to device bindings.
+        bindings.append(int(device_mem))
+        # Append to the appropriate list.
+        if engine.binding_is_input(binding):
+            inputs.append(HostDeviceMem(host_mem, device_mem))
+        else:
+            outputs.append(HostDeviceMem(host_mem, device_mem))
+    return inputs, outputs, bindings, stream
