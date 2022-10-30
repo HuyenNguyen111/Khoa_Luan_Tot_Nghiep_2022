@@ -8,6 +8,7 @@ bp = Blueprint('process', __name__, url_prefix='/')
 event = Event()
 exec = Process(target=detect, args=(event, session))
 
+
 @bp.route("/")
 def index():
     return redirect("/start")

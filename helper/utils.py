@@ -1,6 +1,8 @@
+import time
 import numpy as np
 import cv2
 import math
+
 
 def nms_cpu(boxes, confs, nms_thresh=0.5, min_mode=False):
     # print(boxes.shape)
@@ -35,11 +37,10 @@ def nms_cpu(boxes, confs, nms_thresh=0.5, min_mode=False):
 
         inds = np.where(over <= nms_thresh)[0]
         order = order[inds + 1]
-    
+
     return np.array(keep)
 
 
-import time
 def post_processing(img, conf_thresh, nms_thresh, output):
 
     # anchors = [12, 16, 19, 36, 40, 28, 36, 75, 76, 55, 72, 146, 142, 110, 192, 243, 459, 401]
@@ -72,7 +73,7 @@ def post_processing(img, conf_thresh, nms_thresh, output):
 
     bboxes_batch = []
     for i in range(box_array.shape[0]):
-       
+
         argwhere = max_conf[i] > conf_thresh
         l_box_array = box_array[i, argwhere, :]
         l_max_conf = max_conf[i, argwhere]
@@ -88,23 +89,25 @@ def post_processing(img, conf_thresh, nms_thresh, output):
             ll_max_id = l_max_id[cls_argwhere]
 
             keep = nms_cpu(ll_box_array, ll_max_conf, nms_thresh)
-            
+
             if (keep.size > 0):
                 ll_box_array = ll_box_array[keep, :]
                 ll_max_conf = ll_max_conf[keep]
                 ll_max_id = ll_max_id[keep]
 
                 for k in range(ll_box_array.shape[0]):
-                    bboxes.append([ll_box_array[k, 0], ll_box_array[k, 1], ll_box_array[k, 2], ll_box_array[k, 3], ll_max_conf[k], ll_max_conf[k], ll_max_id[k]])
-        
+                    bboxes.append([ll_box_array[k, 0], ll_box_array[k, 1], ll_box_array[k, 2],
+                                  ll_box_array[k, 3], ll_max_conf[k], ll_max_conf[k], ll_max_id[k]])
+
         bboxes_batch.append(bboxes)
     return bboxes_batch
 
 
 def plot_boxes_cv2(img, boxes, class_names=None, color=None):
-    
+
     img = np.copy(img)
-    colors = np.array([[1, 0, 1], [0, 0, 1], [0, 1, 1], [0, 1, 0], [1, 1, 0], [1, 0, 0]], dtype=np.float32)
+    colors = np.array([[1, 0, 1], [0, 0, 1], [0, 1, 1], [0, 1, 0], [
+                      1, 1, 0], [1, 0, 0]], dtype=np.float32)
 
     def get_color(c, x, max_val):
         ratio = float(x) / max_val * 5
@@ -137,11 +140,12 @@ def plot_boxes_cv2(img, boxes, class_names=None, color=None):
             blue = get_color(0, offset, classes)
             if color is None:
                 rgb = (red, green, blue)
-            msg = str(class_names[cls_id])+" "+str(round(cls_conf,3))
+            msg = str(class_names[cls_id])+" "+str(round(cls_conf, 3))
             t_size = cv2.getTextSize(msg, 0, 0.7, thickness=bbox_thick // 2)[0]
-            c1, c2 = (x1,y1), (x2, y2)
+            c1, c2 = (x1, y1), (x2, y2)
             c3 = (c1[0] + t_size[0], c1[1] - t_size[1] - 3)
-            cv2.rectangle(img, (x1,y1), (int(c3[0]), int(c3[1])), rgb, -1)
-            img = cv2.putText(img, msg, (c1[0], int(c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX,0.7, (0,0,0), bbox_thick//2,lineType=cv2.LINE_AA)        
+            cv2.rectangle(img, (x1, y1), (int(c3[0]), int(c3[1])), rgb, -1)
+            img = cv2.putText(img, msg, (c1[0], int(
+                c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), bbox_thick//2, lineType=cv2.LINE_AA)
         img = cv2.rectangle(img, (x1, y1), (x2, y2), rgb, bbox_thick)
     return img
