@@ -1,0 +1,2 @@
+class Config:
+    SERVER_URL = 'http://localhost:8000'

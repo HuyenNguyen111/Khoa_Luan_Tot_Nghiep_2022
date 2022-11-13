@@ -2,6 +2,8 @@ from flask import Blueprint,  redirect, render_template, request
 from helper import detect, session
 from multiprocessing import Process, Event
 import json
+import requests
+from config import Config
 
 bp = Blueprint('process', __name__, url_prefix='/')
 
@@ -22,14 +24,16 @@ def start():
     if request.method == 'POST':
         print('------- start --------')
         data = {
-            "mssv": request.form['mssv'],
-            "hoTen": request.form['hoten']
+            "studentID": request.form['mssv'],
+            "name": request.form['hoten'],
+            "department": request.form['department']
         }
         with open('result.json', 'w') as f:
             json.dump(data, f)
         exec.start()
         return redirect('/end')
-    return render_template('start.j2')
+    get_dpm = requests.get(url=Config.SERVER_URL+"/get-dpm/")
+    return render_template('start.html', departments=get_dpm.json())
 
 
 @bp.route('/end', methods=('GET', 'POST'))
@@ -44,4 +48,4 @@ def end():
             data = json.load(f)
         data['note'] = request.form['note']
         print(data)
-    return render_template('end.j2')
+    return render_template('end.html')

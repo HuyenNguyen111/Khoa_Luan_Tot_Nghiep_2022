@@ -16,10 +16,13 @@
     padding: 15px 0;
 }
 
-.form_group input {
+.form_group input, select {
     border: 1px solid gray;
     width: 70%;
     padding: 7px;
+}
+.form_group select{
+    padding: 5px;
 }
 
 form button {
@@ -29,6 +32,8 @@ form button {
     color: #fff;
     border-radius: 10px;
 }
+
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -42,7 +47,7 @@ form button {
     }
     .start_note,
     input,
-    button {
+    button,select {
         font-size: 35px;
     }
     .form_group label {
@@ -67,6 +72,9 @@ form button {
     input,
     button {
         font-size: 20px;
+    }
+    select, option{
+        font-size: 16px;
     }
     .form_group label {
         font-size: 18px;
