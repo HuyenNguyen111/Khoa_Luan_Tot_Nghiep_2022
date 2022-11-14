@@ -47,5 +47,5 @@ def end():
         with open('result.json', 'r') as f:
             data = json.load(f)
         data['note'] = request.form['note']
-        print(data)
+        requests.post(Config.SERVER_URL+'/post-data/', data=data)
     return render_template('end.html')
