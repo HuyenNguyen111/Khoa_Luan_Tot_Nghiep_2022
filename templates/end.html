@@ -5,8 +5,11 @@
     <div class="note_info"><span>*</span> Bạn vui lỏng bỏ từng chai vào để máy bắt đầu đếm khi hết chai vui lòng nhấn
         bút end để kết thúc
     </div>
+    <div>
+        Tổng số lượng là: <span id="number">0</span>
+    </div>
     <button type="button" id="btn_end">Kết thúc</button>
-
+    <button type="button" id="btn_count">Đếm</button>
 
     <div id="modal_container">
         <div class="modal" id="modal">
@@ -15,19 +18,19 @@
             </div>
             <div class="modal_body">
                 <ul>
-                    <li>Sinh viên: Nguyễn Văn A</li>
-                    <li>Mã sinh viên: 123456</li>
-                    <li>Số lượng: 10</li>
+                    <li>Sinh viên:  {{user_data.name}}</li>
+                    <li>Mã sinh viên: {{user_data.studentID}}</li>
+                    <li>Số lượng: <span id="sl"></span></li>
                 </ul>
                 <div class="note_info"><span>*</span> Ghi chú: nếu có sai xót vui lòng ghi chú vào ô bên dưới</div>
                 <form action="" id="confirm_form" method="post">
                     <textarea name="note" id="note" placeholder="Ghi chú"></textarea>
+                    <input type="text" id="save" hidden name="save">
                     <button>Xác nhận</button>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
 <script src="{{ url_for('static', filename='js/end.js') }}"></script>
 {% endblock content %}

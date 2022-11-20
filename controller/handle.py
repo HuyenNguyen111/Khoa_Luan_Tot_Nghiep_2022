@@ -30,7 +30,7 @@ def start():
         }
         with open('result.json', 'w') as f:
             json.dump(data, f)
-        exec.start()
+        # exec.start()
         return redirect('/end')
     get_dpm = requests.get(url=Config.SERVER_URL+"/get-dpm/")
     return render_template('start.html', departments=get_dpm.json())
@@ -39,13 +39,11 @@ def start():
 @bp.route('/end', methods=('GET', 'POST'))
 def end():
     global exec, event
+    with open('result.json', 'r') as f:
+            data = json.load(f)
     if request.method == 'POST':
         print("------ end ----------")
-        event.set()
-        exec.join()
-        exec = Process(target=detect, args=(event, ))
-        with open('result.json', 'r') as f:
-            data = json.load(f)
         data['note'] = request.form['note']
+        data['quantity']= int(request.form['save'])
         requests.post(Config.SERVER_URL+'/post-data/', data=data)
-    return render_template('end.html')
+    return render_template('end.html', user_data=data)
