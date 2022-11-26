@@ -10,10 +10,11 @@ IN_IMAGE_W = 416
 CLASS_NAME = "platic_box"
 
 
+labels = [0, 1, 2, 3, 4]
+
 def detect(session) -> None:
     vid = cv2.VideoCapture(0)
     quantity = 0
-    print("22222222222222222222222")
     ret, frame = vid.read()
     resized = cv2.resize(frame, (IN_IMAGE_W, IN_IMAGE_H),
                             interpolation=cv2.INTER_LINEAR)
@@ -22,19 +23,18 @@ def detect(session) -> None:
     img_in = np.expand_dims(img_in, axis=0)
     img_in /= 255.0
     outputs = session.run(None, {"input": img_in})
+    print(outputs[0].shape)
+    print(outputs[1].shape)
     boxes = post_processing(img_in, 0.4, 0.6, outputs)
-    quantity += len(boxes[0])
-    img = plot_boxes_cv2(frame, boxes[0], class_names=CLASS_NAME)
-    cv2.imwrite('grayscale.jpg',img)
-    # if even.is_set():
-    #     break
-    # if cv2.waitKey(1) & 0xFF == ord('q'):
+    for i in range(len(boxes[0])):
+        box = boxes[0][i]
+        if len(box) >= 7:
+            cls_conf = box[5]
+            cls_id = box[6]
+            if cls_conf > 0.5 and cls_id in labels:
+                quantity += 1
         
-    print("1111111111111111111111")
     vid.release()
-    # cv2.destroyAllWindows()
-    print("1111111111111111111111")
-
     # ----------- save data -----------
     with open('result.json', 'r') as f:
         data = json.load(f)
