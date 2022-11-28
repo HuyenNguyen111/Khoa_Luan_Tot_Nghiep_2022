@@ -1,36 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/end.css') }}" />
-<div class="end">
-    <div class="note_info"><span>*</span> Bạn vui lỏng bỏ từng chai vào để máy bắt đầu đếm khi hết chai vui lòng nhấn
-        bút end để kết thúc
-    </div>
-    <div>
-        Tổng số lượng là: <span id="number">0</span>
-    </div>
-    <button type="button" id="btn_end">Kết thúc</button>
-    <button type="button" id="btn_count">Đếm</button>
-
-    <div id="modal_container">
-        <div class="modal" id="modal">
-            <div class="modal_header">
-                <div id="close_modal">x</div>
+<div class="base">
+    <div class="start_note">BỎ RÁC TÍCH ĐIỂM</div>
+    <div class="container">
+        <div class="end">
+            <div class="note_info">
+                <span>*</span>Lưu ý: Bạn vui lòng <span>bỏ từng chai</span> vào thùng để máy bắt đầu đếm và nhấn nút hoàn thành
+                khi kết thúc
+              </div>
+              <div class="count-content">Tổng số lượng hiện tại: <span id="number">0</span> chai</div>
+              <div class="button-group">
+                <button type="button" id="btn_count" class="base-button">Đếm</button>
+                <button type="button" id="btn_end" class="base-button">Kết thúc</button>
+              </div>
+            <div id="modal_container">
+                <div class="modal" id="modal">
+                  <div class="modal_header">
+                    <div class="modal-title">Tổng kết</div>
+                    <div id="close_modal">✖</div>
+                  </div>
+                  <div class="modal_body">
+                    <div class="modal-info-row">
+                      <div class="info-row-label">Sinh viên:</div>
+                      <div class="info-row-value">{{user_data.name}}</div>
+                    </div>
+                    <div class="modal-info-row">
+                      <div class="info-row-label">Mã sinh viên:</div>
+                      <div class="info-row-value">{{user_data.studentID}}</div>
+                    </div>
+                    <div class="modal-info-row">
+                      <div class="info-row-label">Số lượng:</div>
+                      <div class="info-row-value"><span id="sl"></span></div>
+                    </div>
+                    <div class="note_info"><span>*</span> Nếu có sai xót vui lòng ghi chú vào ô bên dưới</div>
+                    <form action="" id="confirm_form" method="post">
+                      <textarea maxlength="255" name="note" id="note" placeholder="Ghi chú"></textarea>
+                      <input type="text" id="save" hidden name="save" />
+                      <button class="base-button confirm-button">Xác nhận</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            <div id='animation' class="spinner-container">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
             </div>
-            <div class="modal_body">
-                <ul>
-                    <li>Sinh viên:  {{user_data.name}}</li>
-                    <li>Mã sinh viên: {{user_data.studentID}}</li>
-                    <li>Số lượng: <span id="sl"></span></li>
-                </ul>
-                <div class="note_info"><span>*</span> Ghi chú: nếu có sai xót vui lòng ghi chú vào ô bên dưới</div>
-                <form action="" id="confirm_form" method="post">
-                    <textarea name="note" id="note" placeholder="Ghi chú"></textarea>
-                    <input type="text" id="save" hidden name="save">
-                    <button>Xác nhận</button>
-                </form>
-            </div>
+            <footer>KLTN © 2022 Nguyen Thi Huyen - Nguyen Nhu Ha</footer>
         </div>
     </div>
+
+   
 </div>
 <script src="{{ url_for('static', filename='js/end.js') }}"></script>
 {% endblock content %}

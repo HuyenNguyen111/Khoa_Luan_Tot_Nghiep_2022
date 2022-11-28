@@ -26,13 +26,21 @@ document.getElementById("close_modal").addEventListener("click", (e) => {
 });
 //count
 document.getElementById("btn_count").addEventListener("click", (e) => {
-    fetch("http://127.0.0.1:5000/count", {
-        method: "GET", // or 'PUT'
-        headers: {
-            "Content-Type": "application/json",
+    fetch(
+        "http://127.0.0.1:5000/count",
+
+        {
+            method: "GET", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+            },
         },
-    })
-        .then((response) => response.json())
+        (document.getElementById("animation").style.display = "flex")
+    )
+        .then((response) => {
+            document.getElementById("animation").style.display = "none";
+            return response.json();
+        })
 
         .then((data) => {
             const span = document.getElementById("number");

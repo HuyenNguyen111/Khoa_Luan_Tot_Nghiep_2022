@@ -3,25 +3,24 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/start.css') }}" />
 <div class="start">
-    <div class="start_note"><span>*</span> Vui lòng nhập thông tin nhấn nút start để bắt đầu</div>
-    <form action="" method="post">
+    <div class="start_note">BỎ RÁC TÍCH ĐIỂM</div>
+    <form class="form-login" action="" method="post">
+        <div class="form-title">Đăng nhập</div>
         <div class="form_group">
-            <label for="mssv">Mã số sinh viên:</label>
-            <input type="text" name="mssv" id="mssv">
+          <input placeholder="Mã số sinh viên" type="text" name="mssv" id="mssv" />
         </div>
         <div class="form_group">
-            <label for="hoten">Họ và tên:</label>
-            <input type="text" name="hoten" id="hoten">
+          <input placeholder="Họ và tên" type="text" name="hoten" id="hoten" />
         </div>
         <div class="form_group">
-            <label for=""></label>
-            <select name="department" id="">
-                {% for d in departments %}
-                    <option value="{{d.id}}">{{d.name}}</option>
-                {% endfor %}
-            </select>
+          <select name="department" id="">
+            {% for d in departments %}
+            <option value="{{d.id}}">{{d.name}}</option>
+            {% endfor %}
+          </select>
         </div>
-        <button type="submit">Bắt đầu</button>
-    </form>
+        <button class="submit-button" type="submit">Bắt đầu</button>
+      </form>
+      <footer>KLTN © 2022 Nguyen Thi Huyen - Nguyen Nhu Ha</footer>
 </div>
 {% endblock content %}

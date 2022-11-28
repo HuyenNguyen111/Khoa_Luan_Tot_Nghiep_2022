@@ -1,88 +1,98 @@
-.start {
-    width: 50%;
-    margin: 0 auto;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
-.start span {
-    color: red;
+.start {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(45deg, #f15fba, #88d1f5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
 }
 
-.start form {
+.start_note {
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.form-login {
+    padding: 30px 0;
+    margin-top: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
     margin-top: 20px;
 }
-.start form .form_group {
+
+.form-title {
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 0.5px solid lightgray;
+    padding-bottom: 20px;
+    color: #f15fba;
+}
+
+.form_group {
+    display: flex;
+    width: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    margin-bottom: 30px;
+    padding: 0 30px;
+}
+.form_group input,
+.form_group select {
+    flex:1;
+    height: 40px;
 }
 
 .form_group input, select {
     border: 1px solid gray;
     width: 70%;
     padding: 7px;
+    outline: none;
+    font-size: 16px;
 }
+
+.form_group input {
+    border: none;
+    border-bottom: 2px solid #ccc;
+}
+
 .form_group select{
     padding: 5px;
+    border: 2px solid #ccc;
 }
 
-form button {
-    padding: 10px 15px;
+.submit-button {
+    padding: 12px;
     border: none;
-    background-color: #3c74f3;
+    background-color: #2691d9;
     color: #fff;
-    border-radius: 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    margin: 0 30px;
 }
 
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .start {
-        width: 70%;
-        margin-top: 100px;
-    }
-    .start_note,
-    input,
-    button,select {
-        font-size: 35px;
-    }
-    .form_group label {
-        font-size: 28px;
-        min-width: 100px;
-    }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    /* ...; */
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-    .start {
-        width: 50%;
-        margin-top: 50px;
-    }
-
-    .start_note,
-    input,
-    button {
-        font-size: 20px;
-    }
-    select, option{
-        font-size: 16px;
-    }
-    .form_group label {
-        font-size: 18px;
-        min-width: 100px;
-    }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-    /* ...; */
+footer {
+    position: absolute;
+    padding: 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.3);
 }
