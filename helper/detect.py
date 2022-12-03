@@ -41,7 +41,7 @@ class CameraThread(threading.Thread):
                 if len(box) >= 7:
                     cls_conf = box[5]
                     cls_id = box[6]
-                    if cls_conf > 0.5 and cls_id in labels:
+                    if cls_conf >= 0.4 and cls_id in labels:
                         quantity += 1
             if os.path.exists('count/request.txt'):
                 os.remove('count/request.txt')
