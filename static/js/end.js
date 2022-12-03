@@ -27,7 +27,7 @@ document.getElementById("close_modal").addEventListener("click", (e) => {
 //count
 document.getElementById("btn_count").addEventListener("click", (e) => {
     fetch(
-        "http://127.0.0.1:5000/count",
+        "http://henry102.click:5555/count",
 
         {
             method: "GET", // or 'PUT'
